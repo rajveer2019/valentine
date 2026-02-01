@@ -80,6 +80,14 @@
     <div id="celebrationScreen" style="display: none">
       <h2>Yay! 🥰</h2>
       <p>Best decision you ever made</p>
+      <div
+        id="dachshund"
+        style="display: none; width: 220px; margin: 20px auto">
+        <img
+          src="https://media.istockphoto.com/id/865392634/vector/cute-cartoon-dachshunds-in-love.jpg?s=612x612&w=0&k=20&c=BJIAAkG5sa5LVoIpr_ajJJ5huZ9qtJSC1f6qe-O5suI="
+          alt="dachshund"
+          style="width: 220px" />
+      </div>
     </div>
 
     <div id="hearts"></div>
@@ -122,6 +130,10 @@
         }
 
         setInterval(spawnHeart, 300);
+
+        setTimeout(function () {
+          document.getElementById("dachshund").style.display = "block";
+        }, 0);
       });
     </script>
   </body>
