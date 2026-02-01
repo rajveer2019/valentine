@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: purple;
+      }
+
+      h1 {
+        color: #f5d0dc;
+        font-size: 2.5rem;
+        text-align: center;
+      }
+
+      button {
+        padding: 0.85rem 2.2rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.15rem;
+        cursor: pointer;
+        margin: 0 0.5rem;
+      }
+
+      #yesBtn {
+        background-color: #e84393;
+        color: white;
+      }
+
+      #noBtn {
+        background-color: rgba(255, 255, 255, 0.07);
+        color: #f5d0dc;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      #hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .heart {
+        position: absolute;
+        top: -40px;
+        font-size: 5rem;
+        animation: fall linear forwards;
+      }
+
+      #celebrationScreen {
+        font-size: 2rem;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(110vh);
+        }
+      }
+    </style>
+    <title>Valentine??</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Will you be my valentine?</h1>
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+
+    <div id="celebrationScreen" style="display: none">
+      <h2>Yay! 🥰</h2>
+      <p>Best decision you ever made</p>
+    </div>
+
+    <div id="hearts"></div>
+    <script>
+      const noBtn = document.getElementById("noBtn");
+
+      document.addEventListener("mousemove", function (e) {
+        const rect = noBtn.getBoundingClientRect();
+        const btnCenterX = rect.left + rect.width / 2;
+        const btnCenterY = rect.top + rect.height / 2;
+        const dist = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
+
+        if (dist < 100) {
+          const newX = 60 + Math.random() * (window.innerWidth - 120);
+          const newY = 60 + Math.random() * (window.innerHeight - 120);
+          noBtn.style.position = "fixed";
+          noBtn.style.left = newX + "px";
+          noBtn.style.top = newY + "px";
+        }
+      });
+
+      const yesBtn = document.getElementById("yesBtn");
+      yesBtn.addEventListener("click", function () {
+        document.getElementById("container").style.display = "none";
+        document.getElementById("celebrationScreen").style.display = "block";
+
+        const emojis = ["❤️", "💕", "💗", "💖", "💝", "💘"];
+
+        function spawnHeart() {
+          const heart = document.createElement("div");
+          heart.classList.add("heart");
+          heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.animationDuration = 3 + Math.random() * 4 + "s";
+          document.getElementById("hearts").appendChild(heart);
+        }
+
+        for (let i = 0; i < 20; i++) {
+          setTimeout(spawnHeart, i * 80);
+        }
+
+        setInterval(spawnHeart, 300);
+      });
+    </script>
+  </body>
+</html>
