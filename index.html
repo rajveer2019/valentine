@@ -4,41 +4,86 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine??</title>
     <style>
       body {
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: purple;
+        background-color: blueviolet;
+        overflow-y: auto;
       }
-
       h1 {
         color: #f5d0dc;
-        font-size: 2.5rem;
+        font-size: 3rem;
         text-align: center;
       }
-
       button {
         padding: 0.85rem 2.2rem;
-        border: none;
         border-radius: 50px;
-        font-size: 1.15rem;
+        font-size: 1rem;
+        border: none;
         cursor: pointer;
-        margin: 0 0.5rem;
       }
-
       #yesBtn {
         background-color: #e84393;
         color: white;
       }
-
       #noBtn {
         background-color: rgba(255, 255, 255, 0.07);
         color: #f5d0dc;
         border: 1px solid rgba(255, 255, 255, 0.2);
       }
-
+      #celebrationScreen {
+        color: pink;
+        text-align: center;
+        font-size: 2rem;
+        padding: 40px 20px;
+      }
+      #scrollText {
+        margin-top: 30px;
+        font-size: 1.5rem;
+        color: #f5d0dc;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+      #playlistSection {
+        margin-top: 60px;
+        padding: 40px 20px;
+      }
+      #playlistText {
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        color: #f5d0dc;
+      }
+      #photoLink {
+        display: inline-block;
+        transition: transform 0.3s;
+      }
+      #photoLink:hover {
+        transform: scale(1.05);
+      }
+      #photoLink img {
+        width: 300px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+      }
       #hearts {
         position: fixed;
         top: 0;
@@ -47,18 +92,12 @@
         height: 100%;
         pointer-events: none;
       }
-
       .heart {
         position: absolute;
         top: -40px;
         font-size: 5rem;
         animation: fall linear forwards;
       }
-
-      #celebrationScreen {
-        font-size: 2rem;
-      }
-
       @keyframes fall {
         0% {
           transform: translateY(0);
@@ -68,53 +107,55 @@
         }
       }
     </style>
-    <title>Valentine??</title>
   </head>
   <body>
     <div id="container">
-      <h1>Will you be my valentine?</h1>
+      <h1>Will you be my Valentine?</h1>
       <button id="yesBtn">Yes</button>
       <button id="noBtn">No</button>
     </div>
-
     <div id="celebrationScreen" style="display: none">
-      <h2>Yay! 🥰</h2>
-      <p>Best decision you ever made</p>
-      <div
-        id="dachshund"
-        style="display: none; width: 220px; margin: 20px auto">
+      <h2>Yay!🥰</h2>
+      <p>This is the best decision you've ever made</p>
+      <div id="dog" style="display: none; width: 220px; margin: 20px auto">
         <img
-          src="https://media.istockphoto.com/id/865392634/vector/cute-cartoon-dachshunds-in-love.jpg?s=612x612&w=0&k=20&c=BJIAAkG5sa5LVoIpr_ajJJ5huZ9qtJSC1f6qe-O5suI="
-          alt="dachshund"
+          src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUya2Ztbnk3bmsyMnlja2M4bGRzczRzNWR1NDNiNDU5Zm5hNjZiNWpoMCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KqvcqG4gXJStcIEArg/giphy-downsized.gif"
+          alt=""
           style="width: 220px" />
       </div>
+      <p id="scrollText" style="display: none">Scroll down ⬇️</p>
+      <div id="playlistSection" style="display: none">
+        <p id="playlistText">Click the picture for our playlist 🎵</p>
+        <a
+          id="photoLink"
+          href="https://music.apple.com/us/playlist/392-columbus-ave/pl.u-r2yBBj2sdLRKy5"
+          target="_blank">
+          <img src="us.jpg" alt="Us" />
+        </a>
+      </div>
     </div>
-
     <div id="hearts"></div>
     <script>
+      const yesBtn = document.getElementById("yesBtn");
       const noBtn = document.getElementById("noBtn");
-
+      noBtn.style.position = "fixed";
       document.addEventListener("mousemove", function (e) {
         const rect = noBtn.getBoundingClientRect();
-        const btnCenterX = rect.left + rect.width / 2;
-        const btnCenterY = rect.top + rect.height / 2;
-        const dist = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
-
-        if (dist < 100) {
-          const newX = 60 + Math.random() * (window.innerWidth - 120);
-          const newY = 60 + Math.random() * (window.innerHeight - 120);
-          noBtn.style.position = "fixed";
+        const btnCentreX = rect.left + rect.width / 2;
+        const btnCentreY = rect.top + rect.height / 2;
+        const dist = Math.hypot(e.clientX - btnCentreX, e.clientY - btnCentreY);
+        if (dist < 40) {
+          const newX = 120 + Math.random() * (window.innerWidth - 240);
+          const newY = 120 + Math.random() * (window.innerHeight - 240);
           noBtn.style.left = newX + "px";
           noBtn.style.top = newY + "px";
         }
       });
-
-      const yesBtn = document.getElementById("yesBtn");
       yesBtn.addEventListener("click", function () {
         document.getElementById("container").style.display = "none";
         document.getElementById("celebrationScreen").style.display = "block";
 
-        const emojis = ["❤️", "💕", "💗", "💖", "💝", "💘"];
+        const emojis = ["🥰", "❤️‍🔥", "💘", "💗", "💜", "💞", "❤️", "👩🏽‍❤️‍💋‍👨🏽"];
 
         function spawnHeart() {
           const heart = document.createElement("div");
@@ -131,9 +172,20 @@
 
         setInterval(spawnHeart, 300);
 
+        // Show dog first
         setTimeout(function () {
-          document.getElementById("dachshund").style.display = "block";
+          document.getElementById("dog").style.display = "block";
         }, 0);
+
+        // Then show scroll text
+        setTimeout(function () {
+          document.getElementById("scrollText").style.display = "block";
+        }, 500);
+
+        // Then show playlist section
+        setTimeout(function () {
+          document.getElementById("playlistSection").style.display = "block";
+        }, 1000);
       });
     </script>
   </body>
